@@ -68,7 +68,7 @@ class info_retriever:
             html_doc = ''
             try:
                 response = urlopen(web_page_url)
-                if 'text/html' in response.getheader('COntent-Type'):
+                if 'text/html' in response.getheader('Content-Type'):
                     html_bytes = response.read()
                     html_doc = html_bytes.decode('utf-8')
             except Exception as e:
