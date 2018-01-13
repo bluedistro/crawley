@@ -1,6 +1,12 @@
-/facebook
-/9gag
-/reddit
-/scrapehero
-/hackernews
+spyder.pyc
+endpoint.pyc
+general.pyc
+domain.pyc
+info_retriever.pyc
+key_words_hunt.pyc
+key_words_hunt.py
+link_finder.pyc
+crawley.pyc
+corpus/
+__pycache__/
 

@@ -1,3 +1,0 @@
-TODO NEXT
-. Check for internet availability before crawling
-. Get the contents of a webpage
