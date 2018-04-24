@@ -1,3 +1,5 @@
+# TODO: Domain Movement Restrictions is performed in this script
+
 from urllib.request import urlopen
 from link_finder import LinkFinder
 from general import *
@@ -63,13 +65,15 @@ class spider:
                 continue
             if url in spider.crawled:
                 continue
-            if spider.domain_name not in url:
-                continue
+            # TODO: Uncomment these lines to restrict the movement its movement within the domain
+            # if spider.domain_name not in url:
+            #     continue
             spider.queue.add(url)
 
     @staticmethod
     def update_files():
         set_to_file(spider.queue, spider.queued_file)
         set_to_file(spider.crawled, spider.crawled_file)
+
 
 

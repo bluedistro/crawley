@@ -27,6 +27,7 @@ class LinkFinder(HTMLParser):
         if tag == 'a':
             for attribute, value in attrs:
                 if attribute == 'href':
+                    # TODO: The parameter was initially base_url so change it back in case of any error
                     url = parse.urljoin(self.base_url, value)
                     self.links.add(url)
 

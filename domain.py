@@ -9,7 +9,11 @@ def get_domain_name(url):
     :return:
     '''
     try:
+
         results = get_subdomain_name(url).split('.')
+        # TODO: Uncomment the lines commented below and above and
+        # TODO: comment those uncommented to avoid pre-domain names example --
+        # TODO: the (name) in => name.example.com
         cleaned_results = results[-2]+ '.' +results[-1]
         return cleaned_results
     except:
