@@ -84,20 +84,22 @@ def url():
             for line in f:
 
                 # trying out the keyword checker
-                response = urlopen(line)
-                if 'text/html' in response.getheader('Content-Type'):
-                    html_bytes = response.read()
-                    html_string = html_bytes.decode('utf-8')
-                    soup = BeautifulSoup(html_string)
-                    text = soup.get_text().lower()
-                    searching_for = ['symbology encoding', 'styled layer descriptor']
-                    for word in searching_for:
-                        if word in text:
-                            print('Keyword {} found in url {}'.format(word, line))
-                            results.append(line.replace('\n', ''))
+                # response = urlopen(line)
+                # if 'text/html' in response.getheader('Content-Type'):
+                #     html_bytes = response.read()
+                #     html_string = html_bytes.decode('utf-8')
+                #     soup = BeautifulSoup(html_string)
+                #     text = soup.get_text().lower()
+                #     searching_for = ['symbology encoding', 'styled layer descriptor']
+                #     for word in searching_for:
+                #         if word in text:
+                #             print('Keyword {} found in url {}'.format(word, line))
+                #             results.append(line.replace('\n', ''))
+                #         else:
+                #             continue
                 # end of trying out
 
-                # results.append(line.replace('\n', ''))
+                results.append(line.replace('\n', ''))
         message = {
             'data' : results
         }
