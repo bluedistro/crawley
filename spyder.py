@@ -3,6 +3,7 @@
 from urllib.request import urlopen
 from link_finder import LinkFinder
 from general import *
+from bs4 import BeautifulSoup
 
 class spider:
 
@@ -49,8 +50,8 @@ class spider:
             if 'text/html' in response.getheader('Content-Type'):
                 html_bytes = response.read()
                 html_string = html_bytes.decode('utf-8')
-            finder = LinkFinder(spider.base_url, page_url)
-            finder.feed(html_string)
+                finder = LinkFinder(spider.base_url, page_url)
+                finder.feed(html_string)
         except Exception as e:
             print('Error: cannot crawl page | check internet connection')
             print(str(e))

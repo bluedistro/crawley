@@ -56,7 +56,7 @@ class endpoint:
     def crawl(self):
         queued_links = file_to_set(self.QUEUE_FILE)
         crawled_links = file_to_set(self.CRAWLED_FILE)
-        if len(queued_links) > 0 and len(crawled_links) < 10:
+        if len(queued_links) > 0 and len(crawled_links) < 100:
             print('Available number of links: {}'.format(str(len(queued_links))))
             self.create_jobs()
         else:
