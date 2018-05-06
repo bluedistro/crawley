@@ -37,9 +37,6 @@ def url():
         effective_links = engine().search_indexed_urls(search_words=theurl)
         print('Effective links')
         print(effective_links)
-        if len(effective_links) == 0:
-            effective_links.append('Nothing found')
-
         message = {
             'data' : effective_links
         }
