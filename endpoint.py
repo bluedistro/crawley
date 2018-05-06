@@ -1,9 +1,8 @@
-import threading
+import threading, time
 from queue import Queue
 from spyder import spider
 from domain import *
 from general import *
-
 
 class endpoint:
 
@@ -30,13 +29,23 @@ class endpoint:
         spider(self.PROJECT_NAME,self. HOMEPAGE, self.DOMAIN_NAME)
 
     # do the next job in the queue
+    # def work(self, stop):
+    #     while True:
+    #         url = self.queue.get()
+    #         spider.crawl_page(threading.current_thread().name, url)
+    #         self.queue.task_done()
+    #         if stop():
+    #             print("Exiting Loop")
+    #             break
+    #     print("Thread {}, signing off".format(threading.current_thread().name))
+
+
+    # do the next job in the queue
     def work(self):
         while True:
             url = self.queue.get()
             spider.crawl_page(threading.current_thread().name, url)
             self.queue.task_done()
-
-
 
     # create worker threads-> dies when main exits
     def create_workers(self):
@@ -44,6 +53,34 @@ class endpoint:
             t = threading.Thread(target=self.work)
             t.daemon = True
             t.start()
+
+    # create worker threads-> dies when main exits
+    # def create_workers(self):
+    #     stop_threads = False
+    #     workers = []
+    #     results = []
+    #     for _ in range(self.NUMBER_OF_THREADS):
+    #         t = threading.Thread(target=self.work, args=(lambda: stop_threads,))
+    #         t.daemon = True
+    #         workers.append(t)
+    #         with open('geo_gis/crawled.txt', 'rt') as f:
+    #             for line in f:
+    #                 results.append(line.replace('\n', ''))
+    #             f.close()
+    #             print('LENGTH OF CRAWLED FILES')
+    #             print(len(results))
+    #             if len(results) <= 50:
+    #                 t.start()
+    #             elif len(results) > 50:
+    #                 print("create_workers method calling!: done sleeping; time to stop the threads.")
+    #                 stop_threads = True
+    #                 for worker in workers:
+    #                     worker.join()
+    #                     print('Finish')
+    #                 return None
+
+
+
 
     #each queued link is a new job
     def create_jobs(self):
@@ -56,7 +93,8 @@ class endpoint:
     def crawl(self):
         queued_links = file_to_set(self.QUEUE_FILE)
         crawled_links = file_to_set(self.CRAWLED_FILE)
-        if len(queued_links) > 0 and len(crawled_links) < 20:
+        # if len(queued_links) > 0 and len(crawled_links) <= 50:
+        if len(queued_links) > 0:
             print('Available number of links: {}'.format(str(len(queued_links))))
             self.create_jobs()
         else:

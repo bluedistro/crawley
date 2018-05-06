@@ -9,4 +9,6 @@ link_finder.pyc
 crawley.pyc
 corpus/
 __pycache__/
+test_crawled.txt
+get_test.py
 
