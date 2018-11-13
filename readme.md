@@ -1,5 +1,5 @@
 # Crawley
-Crawley is a web crawler which crawls the web for all urls which contain particular keywords fed to it by the user starting from a initialized url.
+Crawley is a web crawler which crawls the web for all urls which contain particular keywords fed to it by the user starting from a initialized url. This project works only with Python3 for now.
 
   - The development of this project has been haulted for the time being however, all contributions to it are welcome.
 
