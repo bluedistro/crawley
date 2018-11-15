@@ -68,17 +68,17 @@ app.secret_key = str(randint(1000, 10000))
 #     return json.dumps(message)
 
 
-
+# endpoint linking to the frontend
 @app.route('/api/url', methods=['GET', 'POST'])
 def url():
     if request.method == 'POST':
         content = request.get_json(force=True, silent=True)
         theurl = str(content['url'])
-        sites = endpoint(project_name='geo_gis', site=theurl)
+        sites = endpoint(project_name='geo_gis', homepage=theurl)
         sites.create_workers()
         sites.crawl()
         thefile = os.path.join('geo_gis', 'crawled.txt')
-        results = []
+        results = list()
         with open(thefile, 'rt') as f:
             for line in f:
                 results.append(line.replace('\n', ''))
@@ -86,6 +86,25 @@ def url():
             'data' : results
         }
         return json.dumps(message)
+    
+# command line endpoint test
+@app.route('/api/crawler-test/<string:output_dir>')
+def test(output_dir):
+    # test url startpoint
+    url = "https://news.ycombinator.com"
+    sites = endpoint(project_name=output_dir, homepage=url)
+    sites.create_workers()
+    sites.crawl()
+    saved_files = os.path.join(dir, 'crawled.txt')
+    results = list()
+    with open(saved_files, 'rt') as f:
+        for line in f:
+            results.append(line.replace('\n', ''))
+    message = {
+        'results': results
+    }
+
+    return json.dumps(message)
 
 # receives a list of all the urls and for each and every one of them, returns the ip information back
 # as a json key -> value (list) form
